@@ -1,0 +1,23 @@
+{
+  "household": {
+    "3d-printed-vase": 29.99,
+    "3d-printed-lamp": 49.99,
+    "3d-printed-decoration": 19.99,
+    "3d-printed-plate": 14.99,
+    "3d-printed-cup": 9.99
+  },
+  "gadgets": {
+    "3d-printed-phone-case": 19.99,
+    "3d-printed-keyboard": 49.99,
+    "3d-printed-mouse": 29.99,
+    "3d-printed-speaker": 39.99,
+    "3d-printed-headphones": 59.99
+  },
+  "games": {
+    "3d-printed-chess": 39.99,
+    "3d-printed-puzzle": 24.99,
+    "3d-printed-dice": 14.99,
+    "3d-printed-toy": 19.99,
+    "3d-printed-game-board": 49.99
+  }
+}
