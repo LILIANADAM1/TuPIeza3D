@@ -11,7 +11,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://tu-usuario.github.io/thingiverse-3d-store/"
+  "homepage": "https://LILIANADAM1.github.io/thingiverse-3d-store/",
   "dependencies": {
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
