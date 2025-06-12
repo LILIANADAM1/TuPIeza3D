@@ -19,14 +19,8 @@ export default function Hogar() {
         setError('');
         const data = await fetchProductsByCategory('hogar');
         
-        // Agregar precios personalizados a los productos
-        const productsWithPrices = await Promise.all(data.map(async product => ({
-          ...product,
-          price: await getCategoryPrice('household', product.slug)
-        })));
-
-        if (productsWithPrices && productsWithPrices.length > 0) {
-          setProducts(productsWithPrices);
+        if (data && data.length > 0) {
+          setProducts(data);
           setError(null);
           setHasMore(data.length > 0);
         } else {

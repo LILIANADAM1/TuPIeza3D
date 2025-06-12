@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { HeartIcon, ShoppingCartIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 
-export default function ProductCard({ product, onLike, onCart, customPrice }) {
+export default function ProductCard({ product, onLike, onCart }) {
   const [quantity, setQuantity] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -46,11 +46,8 @@ export default function ProductCard({ product, onLike, onCart, customPrice }) {
           {product.name}
         </h3>
         <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
-        
-
-
         <div className="flex justify-between items-center">
-          <span className="text-gray-500 text-sm">${customPrice || product.price || 'Precio no disponible'}</span>
+          <span className="text-gray-500 text-sm">${product.price || 'Precio no disponible'}</span>
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
