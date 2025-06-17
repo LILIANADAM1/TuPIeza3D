@@ -13,8 +13,10 @@
   },
   "homepage": "https://lilianadam1.github.io/TuPIeza3D/",
   "dependencies": {
+    "@auth0/auth0-react": "^2.3.0",
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
+    "@react-oauth/google": "^0.12.2",
     "@splidejs/react-splide": "^0.7.12",
     "@splidejs/splide": "^4.1.4",
     "axios": "^1.9.0",

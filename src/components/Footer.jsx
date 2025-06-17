@@ -28,8 +28,8 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contacto</h3>
             <ul className="space-y-2">
-              <li className="text-gray-400">Email: info@3dstore.com</li>
-              <li className="text-gray-400">Teléfono: (555) 123-4567</li>
+              <li className="text-gray-400">Email: tuPieza3D@gmail.com</li>
+              <li className="text-gray-400">Teléfono: +34 612 345 678</li>
             </ul>
           </div>
         </div>

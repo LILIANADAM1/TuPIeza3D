@@ -3,11 +3,33 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import ProductCard from './ProductCard';
 import { api } from '../services/api';
+import { useAuth0 } from '@auth0/auth0-react';
+import { useStore } from '../context/StoreContext';
 
 export default function TopSales() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { user } = useAuth0();
+  const { addToFavorites, removeFromFavorites, addToCart } = useStore();
+
+  const handleLike = async (productId, isLiked) => {
+    try {
+      if (isLiked) {
+        await api.post('/favorites', { productId });
+        addToFavorites(productId);
+      } else {
+        await api.delete(`/favorites/${productId}`);
+        removeFromFavorites(productId);
+      }
+    } catch (error) {
+      console.error('Error al manejar favoritos:', error);
+    }
+  };
+
+  const isProductLiked = (productId) => {
+    return user?.favorites?.includes(productId) || false;
+  };
 
   useEffect(() => {
     const fetchTopSelling = async () => {
@@ -104,7 +126,12 @@ export default function TopSales() {
             {products.map((product) => (
               <SplideSlide key={product.id}>
                 <div className="w-full h-full">
-                  <ProductCard product={product} />
+                  <ProductCard 
+                    product={product} 
+                    isLiked={isProductLiked(product.id)}
+                    onLike={handleLike}
+                    onCart={(productId, quantity) => addToCart(productId, quantity)}
+                  />
                 </div>
               </SplideSlide>
             ))}
