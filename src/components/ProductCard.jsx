@@ -1,13 +1,10 @@
 import { useState, useEffect } from 'react';
-import {
-  HeartIcon,
-  ShoppingCartIcon,
-  MinusIcon,
-  PlusIcon,
-} from '@heroicons/react/24/outline';
+import { HeartIcon, ShoppingCartIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
 import UnauthenticatedModal from './UnauthenticatedModal';
+import { getProductPrice, getProductDescription } from '../services/prices';
 
 export default function ProductCard({ product, onLike, onCart, isLiked: initialIsLiked = false }) {
   const { isAuthenticated } = useAuth0();
@@ -44,9 +41,9 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
       id: product.id,
       name: product.name,
       image: product.image || product.thumbnail,
-      price: product.price,
+      price: getProductPrice(product),
       quantity: quantity,
-      description: product.description
+      description: getProductDescription(product)
     };
     addToCart(productToAdd);
   };
@@ -89,7 +86,7 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
           </p>
           <div className="flex justify-between items-center">
             <span className="text-gray-500 text-sm">
-              ${product.price || 'Precio no disponible'}
+              {getProductPrice(product)}€
             </span>
             <div className="flex items-center space-x-2">
               <button

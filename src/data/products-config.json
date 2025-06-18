@@ -1,0 +1,40 @@
+{
+  "categories": {
+    "hogar": {
+      "name": "Hogar",
+      "keywords": ["sliding", "balcony", "door", "drying", "tray", "cassette", "tape", "waffle"],
+      "priceRange": {
+        "min": 19.99,
+        "max": 49.99,
+        "step": 5
+      }
+    },
+    "gadgets": {
+      "name": "Gadgets",
+      "keywords": ["servo", "horn", "filadryer", "sp2", "charging", "adapter"],
+      "priceRange": {
+        "min": 29.99,
+        "max": 79.99,
+        "step": 10
+      }
+    },
+    "juegos": {
+      "name": "Juegos y juguetes",
+      "keywords": ["keychain", "figure", "dinosaur", "robot", "duck"],
+      "priceRange": {
+        "min": 14.99,
+        "max": 34.99,
+        "step": 3
+      }
+    }
+  },
+  "defaultCategory": {
+    "name": "General",
+    "priceRange": {
+      "min": 10.0,
+      "max": 20.0,
+      "step": 2
+    }
+  },
+  "products": {}
+}

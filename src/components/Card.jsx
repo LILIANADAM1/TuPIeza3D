@@ -1,12 +1,14 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext';
+import { useNavigate } from 'react-router-dom';
 import { ShoppingCartIcon, XMarkIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 
-const Cart = () => {
-  const { cart, removeFromCart, clearCart, updateItemQuantity } = useStore();
+const Card = () => {
+  const { card, removeFromCard, clearCard, updateItemQuantity } = useStore();
+  const navigate = useNavigate();
 
   const getTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return card.reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
   return (
@@ -18,12 +20,12 @@ const Cart = () => {
             <div className="flex items-center space-x-2">
               <span className="text-gray-600">Artículos:</span>
               <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-semibold">
-                {cart.reduce((total, item) => total + item.quantity, 0)}
+                {card.reduce((total, item) => total + item.quantity, 0)}
               </span>
             </div>
           </div>
           
-          {cart.length === 0 ? (
+          {card.length === 0 ? (
             <div className="text-center py-12">
               <ShoppingCartIcon className="mx-auto h-12 w-12 text-gray-400" />
               <p className="text-gray-600">Tu cesta está vacía</p>
@@ -31,7 +33,7 @@ const Cart = () => {
           ) : (
             <div>
               <div className="space-y-4">
-                {cart.map((item) => (
+                {card.map((item) => (
                   <div key={item.id} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                     <div className="flex items-center space-x-4">
                       <img
@@ -67,7 +69,7 @@ const Cart = () => {
                       </div>
                     </div>
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCard(item.id)}
                       className="text-red-600 hover:text-red-800"
                     >
                       <XMarkIcon className="h-5 w-5" />
@@ -81,12 +83,20 @@ const Cart = () => {
                   <h3 className="text-lg font-medium">Total</h3>
                   <p className="text-lg font-bold">${getTotal().toFixed(2)}</p>
                 </div>
+                <div className="space-y-4">
                 <button
-                  onClick={clearCart}
-                  className="mt-4 w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+                  onClick={() => navigate('/login')}
+                  className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
+                >
+                  Comenzar Pedido
+                </button>
+                <button
+                  onClick={clearCard}
+                  className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
                 >
                   Limpiar Cesta
                 </button>
+              </div>
               </div>
             </div>
           )}
@@ -96,4 +106,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Card;

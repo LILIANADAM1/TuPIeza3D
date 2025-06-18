@@ -12,7 +12,7 @@ import CategoriesMenu from './components/CategoriesMenu';
 import Auth0Login from './components/Auth0Login';
 import Auth0ProviderWithHistory from './components/Auth0Provider';
 import Profile from './components/Profile';
-import Cart from './components/Cart';
+import Card from './components/Card';
 import Favorites from './components/Favorites';
 import About from './components/About';
 import Contacto from './components/Contacto';
@@ -42,7 +42,7 @@ function App() {
                 <Route path="/contact" element={<Contacto />} />
                 <Route path="/login" element={<Auth0Login />} />
                 <Route path="/perfil" element={<Profile />} />
-                <Route path="/cesta" element={<Cart />} />
+                <Route path="/cesta" element={<Card />} />
                 <Route path="/favoritos" element={<Favorites />} />
               </Routes>
             </main>

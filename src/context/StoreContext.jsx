@@ -7,24 +7,24 @@ export const useStore = () => {
 };
 
 export const StoreProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+  const [card, setCard] = useState([]);
   const [favorites, setFavorites] = useState([]);
 
   const updateCart = (productId, newQuantity) => {
-    const updatedCart = cart.map(item => 
+    const updatedCard = card.map(item => 
       item.id === productId 
         ? { ...item, quantity: newQuantity }
         : item
     );
-    setCart(updatedCart);
+    setCard(updatedCard);
   };
 
   const addToCart = (product) => {
-    const existingItem = cart.find(item => item.id === product.id);
+    const existingItem = card.find(item => item.id === product.id);
     if (existingItem) {
       updateCart(product.id, existingItem.quantity + product.quantity);
     } else {
-      setCart([...cart, { ...product, quantity: product.quantity }]);
+      setCard([...card, { ...product, quantity: product.quantity }]);
     }
   };
 
@@ -37,7 +37,7 @@ export const StoreProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    setCart(cart.filter(item => item.id !== productId));
+    setCard(card.filter(item => item.id !== productId));
   };
 
   const addToFavorites = (product) => {
@@ -51,13 +51,13 @@ export const StoreProvider = ({ children }) => {
   };
 
   const clearCart = () => {
-    setCart([]);
+    setCard([]);
   };
 
   return (
     <StoreContext.Provider 
       value={{ 
-        cart,
+        card,
         favorites,
         addToCart,
         removeFromCart,
