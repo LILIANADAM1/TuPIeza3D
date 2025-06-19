@@ -56,6 +56,26 @@ export const fetchTopProducts = async () => {
   }
 }
 
+export const updateUserCart = async (userId, cart) => {
+  try {
+    const response = await api.put(`/users/${userId}/cart`, { cart });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating user cart:', error);
+    throw error;
+  }
+};
+
+export const getUserCart = async (userId) => {
+  try {
+    const response = await api.get(`/users/${userId}/cart`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user cart:', error);
+    throw error;
+  }
+};
+
 export const fetchProducts = async () => {
   try {
     const response = await api.get('/things');

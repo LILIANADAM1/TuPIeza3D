@@ -7,20 +7,27 @@ import UnauthenticatedModal from './UnauthenticatedModal';
 import { getProductPrice, getProductDescription } from '../services/prices';
 
 export default function ProductCard({ product, onLike, onCart, isLiked: initialIsLiked = false }) {
-  const { isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const [showModal, setShowModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const [isLiked, setIsLiked] = useState(isAuthenticated ? initialIsLiked : false);
+  const [isLiked, setIsLiked] = useState(false);
+
+  // Actualizamos el estado de "Me gusta" cuando cambia el valor inicial
+  useEffect(() => {
+    if (initialIsLiked !== undefined) {
+      setIsLiked(initialIsLiked);
+    }
+  }, [initialIsLiked]);
 
   // Reiniciamos el estado de "Me gusta" cuando el usuario no está autenticado
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!user) {
       setIsLiked(false);
     }
-  }, [isAuthenticated]);
+  }, [user]);
 
   const handleLike = () => {
-    if (!isAuthenticated) {
+    if (!user) {
       setShowModal(true);
       return;
     }
@@ -32,7 +39,7 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
   };
 
   // Aseguramos que el corazón se mantenga en estado neutral cuando no estás logueado
-  const heartColor = isAuthenticated ? (isLiked ? 'text-red-500' : 'text-gray-400') : 'text-gray-400';
+  const heartColor = user ? (isLiked ? 'text-red-500' : 'text-gray-400') : 'text-gray-400';
 
   const { addToCart } = useStore();
 
@@ -56,12 +63,15 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
       <div className="bg-white rounded-lg shadow-md overflow-hidden">
         <div className="relative aspect-[4/3]">
           <img
-            src={product.thumbnail || product.image}
+            src={product.image || product.thumbnail}
             alt={product.name}
             className="w-full h-full object-cover object-center"
             loading="lazy"
             decoding="async"
             fetchpriority="high"
+            width="400"
+            height="300"
+            quality="90"
             onError={(e) => {
               e.currentTarget.src = '/placeholder-image.jpg';
             }}
@@ -71,9 +81,11 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
               onClick={handleLike}
               className="p-2 rounded-full bg-white hover:bg-red-200 hover:text-white"
             >
-              <HeartIcon
-                className={`h-6 w-6 ${heartColor}`}
-              />
+              {isLiked ? (
+                <HeartIconSolid className={`h-6 w-6 ${heartColor}`} />
+              ) : (
+                <HeartIcon className={`h-6 w-6 ${heartColor}`} />
+              )}
             </button>
           </div>
         </div>

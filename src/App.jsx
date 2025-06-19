@@ -12,10 +12,11 @@ import CategoriesMenu from './components/CategoriesMenu';
 import Auth0Login from './components/Auth0Login';
 import Auth0ProviderWithHistory from './components/Auth0Provider';
 import Profile from './components/Profile';
-import Card from './components/Card';
+import Cesta from './components/Cesta';
 import Favorites from './components/Favorites';
 import About from './components/About';
 import Contacto from './components/Contacto';
+import SearchResults from './pages/SearchResults';
 import { StoreProvider } from './context/StoreContext';
 import './App.css';
 
@@ -35,6 +36,7 @@ function App() {
                     <Products />
                   </div>
                 } />
+                <Route path="/search" element={<SearchResults />} />
                 <Route path="/categorias/hogar" element={<Hogar />} />
                 <Route path="/categorias/juegos-juguetes" element={<JuegosJuguetes />} />
                 <Route path="/categorias/gadgets" element={<Gadgets />} />
@@ -42,7 +44,7 @@ function App() {
                 <Route path="/contact" element={<Contacto />} />
                 <Route path="/login" element={<Auth0Login />} />
                 <Route path="/perfil" element={<Profile />} />
-                <Route path="/cesta" element={<Card />} />
+                <Route path="/cesta" element={<Cesta />} />
                 <Route path="/favoritos" element={<Favorites />} />
               </Routes>
             </main>

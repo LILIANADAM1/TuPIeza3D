@@ -1,11 +1,13 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext';
 import { useNavigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import { ShoppingCartIcon, XMarkIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 
-const Card = () => {
-  const { card, removeFromCard, clearCard, updateItemQuantity } = useStore();
+const Cesta = () => {
+  const { card, removeFromCart, clearCart, updateItemQuantity } = useStore();
   const navigate = useNavigate();
+  const { user, loginWithRedirect } = useAuth0();
 
   const getTotal = () => {
     return card.reduce((total, item) => total + (item.price * item.quantity), 0);
@@ -69,7 +71,7 @@ const Card = () => {
                       </div>
                     </div>
                     <button
-                      onClick={() => removeFromCard(item.id)}
+                      onClick={() => removeFromCart(item.id)}
                       className="text-red-600 hover:text-red-800"
                     >
                       <XMarkIcon className="h-5 w-5" />
@@ -84,19 +86,33 @@ const Card = () => {
                   <p className="text-lg font-bold">${getTotal().toFixed(2)}</p>
                 </div>
                 <div className="space-y-4">
-                <button
-                  onClick={() => navigate('/login')}
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"
-                >
-                  Comenzar Pedido
-                </button>
-                <button
-                  onClick={clearCard}
-                  className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
-                >
-                  Limpiar Cesta
-                </button>
-              </div>
+                  <button
+                    onClick={async () => {
+                      if (!user) {
+                        try {
+                          // Guardar la cesta actual en localStorage antes de redirigir
+                          localStorage.setItem('guestCart', JSON.stringify(card));
+                          await loginWithRedirect({
+                            returnTo: window.location.origin + '/cesta'
+                          });
+                        } catch (error) {
+                          console.error('Error al iniciar sesión:', error);
+                        }
+                      } else {
+                        navigate('/pedido');
+                      }
+                    }}
+                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+                  >
+                    {user ? 'Tramitar Pedido' : 'Iniciar Sesión para Tramitar'}
+                  </button>
+                  <button
+                    onClick={clearCart}
+                    className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+                  >
+                    Limpiar Cesta
+                  </button>
+                </div>
               </div>
             </div>
           )}
@@ -106,4 +122,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default Cesta;

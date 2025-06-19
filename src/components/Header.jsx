@@ -7,6 +7,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
+import SearchBar from './SearchBar';
 import logo from '../assets/logopieza.png';
 
 export default function Header() {
@@ -25,6 +26,11 @@ export default function Header() {
               <img src={logo} alt="Tu Pieza 3D" className="h-16 w-auto" />
               <span className="ml-4 text-3xl font-bold text-gray-800">Tu Pieza 3D</span>
             </Link>
+          </div>
+
+          {/* Buscador */}
+          <div className="flex-1 px-4">
+            <SearchBar />
           </div>
 
           {/* Acciones a la derecha */}

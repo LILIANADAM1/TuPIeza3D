@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
@@ -12,17 +14,16 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Categorías</h3>
             <ul className="space-y-2">
-              <li><a href="/categorias/hogar" className="text-gray-400 hover:text-white">Hogar</a></li>
-              <li><a href="/categorias/juegos-juguetes" className="text-gray-400 hover:text-white">Juegos y juguetes</a></li>
-              <li><a href="/categorias/gadgets" className="text-gray-400 hover:text-white">Gadgets</a></li>
+              <li><Link to="/categorias/hogar" className="text-gray-400 hover:text-white">Hogar</Link></li>
+              <li><Link to="/categorias/juegos-juguetes" className="text-gray-400 hover:text-white">Juegos y juguetes</Link></li>
+              <li><Link to="/categorias/gadgets" className="text-gray-400 hover:text-white">Gadgets</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Información</h3>
             <ul className="space-y-2">
-              <li><a href="/about" className="text-gray-400 hover:text-white">Sobre Nosotros</a></li>
-              <li><a href="/contact" className="text-gray-400 hover:text-white">Contacto</a></li>
-              <li><a href="/terms" className="text-gray-400 hover:text-white">Términos y Condiciones</a></li>
+              <li><Link to="/about" className="text-gray-400 hover:text-white">Sobre Nosotros</Link></li>
+              <li><Link to="/contact" className="text-gray-400 hover:text-white">Contacto</Link></li>
             </ul>
           </div>
           <div>
