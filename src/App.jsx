@@ -26,7 +26,7 @@ function App() {
       <Auth0ProviderWithHistory>
         <Router 
           future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-          basename="/TuPIeza3D"
+          basename="/TuPIeza3D/"
         >
           <div className="min-h-screen flex flex-col">
             <Header />
