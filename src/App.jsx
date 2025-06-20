@@ -13,7 +13,6 @@ import Auth0Login from './components/Auth0Login';
 import Auth0ProviderWithHistory from './components/Auth0Provider';
 import Profile from './components/Profile';
 import Cesta from './components/Cesta';
-import Favorites from './components/Favorites';
 import About from './components/About';
 import Contacto from './components/Contacto';
 import SearchResults from './pages/SearchResults';
@@ -45,7 +44,6 @@ function App() {
                 <Route path="/login" element={<Auth0Login />} />
                 <Route path="/perfil" element={<Profile />} />
                 <Route path="/cesta" element={<Cesta />} />
-                <Route path="/favoritos" element={<Favorites />} />
               </Routes>
             </main>
             <Footer />

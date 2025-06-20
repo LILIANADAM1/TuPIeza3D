@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HeartIcon, ShoppingCartIcon, MinusIcon, PlusIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
-import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
 import { getProductPrice, getProductDescription } from '../services/prices';
@@ -18,12 +16,11 @@ const SearchResults = () => {
   const [hasMore, setHasMore] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  const { addToCart } = useStore();
+  const { addToCart } = useStore();  // SOLO addToCart
+  const { user } = useAuth0();
 
   const searchQuery = new URLSearchParams(location.search).get('q') || '';
 
-
-  // Filter out duplicate products based on their ID
   const filterDuplicates = (newResults, currentResults) => {
     const existingIds = new Set(currentResults.map(r => r.id));
     return newResults.filter(result => !existingIds.has(result.id));
@@ -51,7 +48,6 @@ const SearchResults = () => {
       const data = await response.json();
       const filteredResults = filterDuplicates(data.hits, results);
       
-      // Only add new results if we have any
       if (filteredResults.length > 0) {
         setResults(prev => [...prev, ...filteredResults]);
         setHasMore(true);
@@ -75,7 +71,6 @@ const SearchResults = () => {
     }
   }, [searchQuery]);
 
-  // Handle page changes
   useEffect(() => {
     if (page > 1 && searchQuery) {
       fetchResults(page);
@@ -116,26 +111,23 @@ const SearchResults = () => {
       {!loading && !error && results.length > 0 && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {results.map((result) => (
-  <ProductCard
-    key={`${result.id}-${result.public_url || searchQuery}`}
-    product={result}
-    onLike={(id, isLiked) => {
-      // Aquí puedes agregar la lógica para manejar los favoritos
-    }}
-    onCart={(id, quantity) => {
-      const productToAdd = {
-        id: result.id,
-        name: result.name,
-        image: result.thumbnail,
-        price: getProductPrice(result),
-        quantity,
-        description: getProductDescription(result)
-      };
-      addToCart(productToAdd);
-    }}
-  />
-))}
-
+            <ProductCard
+              key={`${result.id}-${result.public_url || searchQuery}`}
+              product={result}
+              // Eliminado onLike que usaba favoritos
+              onCart={(id, quantity) => {
+                const productToAdd = {
+                  id: result.id,
+                  name: result.name,
+                  image: result.thumbnail,
+                  price: `${Number(getProductPrice(result)).toFixed(2)} €`,
+                  quantity,
+                  description: getProductDescription(result)
+                };
+                addToCart(productToAdd);
+              }}
+            />
+          ))}
         </div>
       )}
 
