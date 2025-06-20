@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Hogar from './pages/Hogar';
 import JuegosJuguetes from './pages/JuegosJuguetes';
 import Gadgets from './pages/Gadgets';
@@ -17,24 +17,23 @@ import About from './components/About';
 import Contacto from './components/Contacto';
 import SearchResults from './pages/SearchResults';
 import { StoreProvider } from './context/StoreContext';
+import MainPage from './pages/MainPage';
 import './App.css';
 
 function App() {
   return (
     <StoreProvider>
       <Auth0ProviderWithHistory>
-        <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <Router 
+          future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+          basename="/TuPIeza3D"
+        >
           <div className="min-h-screen flex flex-col">
             <Header />
             <CategoriesMenu />
             <main className="flex-grow">
               <Routes>
-                <Route path="/" element={
-                  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <TopSales />
-                    <Products />
-                  </div>
-                } />
+                <Route path="/" element={<MainPage />} />
                 <Route path="/search" element={<SearchResults />} />
                 <Route path="/categorias/hogar" element={<Hogar />} />
                 <Route path="/categorias/juegos-juguetes" element={<JuegosJuguetes />} />

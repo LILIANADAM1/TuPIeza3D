@@ -6,10 +6,10 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
   
   // Determinar la URL de callback según el entorno
-  const isProduction = window.location.hostname === 'lilianadam1.github.io';
+  const isProduction = process.env.NODE_ENV === 'production';
   const redirectUri = isProduction 
-    ? 'https://lilianadam1.github.io/callback'
-    : window.location.origin + '/callback';
+    ? 'https://lilianadam1.github.io/TuPIeza3D/'
+    : window.location.origin;
 
   return (
     <Auth0Provider
@@ -17,7 +17,6 @@ const Auth0ProviderWithHistory = ({ children }) => {
       clientId={clientId}
       authorizationParams={{
         redirect_uri: redirectUri,
-        audience: 'https://lilianadam1.github.io',
       }}
     >
       {children}
