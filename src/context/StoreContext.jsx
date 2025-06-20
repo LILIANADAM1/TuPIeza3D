@@ -12,7 +12,14 @@ export const StoreProvider = ({ children }) => {
   const { user } = useAuth0();
   const [card, setCard] = useState(() => {
     const cart = localStorage.getItem('guestCart');
-    return cart ? JSON.parse(cart) : [];
+    const parsedCart = cart ? JSON.parse(cart) : [];
+    // Asegurar que cada item tenga un precio válido
+    const validCart = parsedCart.map(item => ({
+      ...item,
+      price: item.price || 0,
+      quantity: item.quantity || 1
+    }));
+    return validCart;
   });
   const [favorites, setFavorites] = useState([]);
 

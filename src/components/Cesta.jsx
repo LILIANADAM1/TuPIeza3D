@@ -10,7 +10,20 @@ const Cesta = () => {
   const { user, loginWithRedirect } = useAuth0();
 
   const getTotal = () => {
-    return card.reduce((total, item) => total + (item.price * item.quantity), 0);
+    if (!card || !Array.isArray(card)) return 0;
+    return card.reduce((total, item) => {
+      const itemPrice = Number(item.price) || 0;
+      const itemQuantity = Number(item.quantity) || 1;
+      return total + (itemPrice * itemQuantity);
+    }, 0);
+  };
+
+  // Formatear precio
+  const formatPrice = (price) => {
+    if (price === null || price === undefined || isNaN(price)) {
+      return '0.00€';
+    }
+    return Number(price).toFixed(2) + '€';
   };
 
   return (
@@ -43,31 +56,33 @@ const Cesta = () => {
                         alt={item.name}
                         className="h-16 w-16 rounded"
                       />
-                      <div>
+                      <div className="flex flex-col">
                         <h3 className="font-medium">{item.name}</h3>
-                        <div className="flex items-center space-x-2">
-                          <button
-                            onClick={() => {
-                              const newQuantity = Math.max(1, item.quantity - 1);
-                              updateItemQuantity(item.id, newQuantity);
-                            }}
-                            className="p-1 rounded-full hover:bg-gray-100"
-                          >
-                            <MinusIcon className="h-5 w-5 text-gray-400" />
-                          </button>
-                          <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full">
-                            {item.quantity}
-                          </span>
-                          <button
-                            onClick={() => {
-                              updateItemQuantity(item.id, item.quantity + 1);
-                            }}
-                            className="p-1 rounded-full hover:bg-gray-100"
-                          >
-                            <PlusIcon className="h-5 w-5 text-gray-400" />
-                          </button>
+                        <div className="flex items-center space-x-4">
+                          <div className="flex items-center space-x-2">
+                            <button
+                              onClick={() => {
+                                const newQuantity = Math.max(1, item.quantity - 1);
+                                updateItemQuantity(item.id, newQuantity);
+                              }}
+                              className="p-1 rounded-full hover:bg-gray-100"
+                            >
+                              <MinusIcon className="h-5 w-5 text-gray-400" />
+                            </button>
+                            <span className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full">
+                              {item.quantity}
+                            </span>
+                            <button
+                              onClick={() => {
+                                updateItemQuantity(item.id, item.quantity + 1);
+                              }}
+                              className="p-1 rounded-full hover:bg-gray-100"
+                            >
+                              <PlusIcon className="h-5 w-5 text-gray-400" />
+                            </button>
+                          </div>
+                          <p className="text-gray-600">{formatPrice(item.price * item.quantity)}</p>
                         </div>
-                        <p className="text-gray-600 mt-2">${(item.price * item.quantity).toFixed(2)}</p>
                       </div>
                     </div>
                     <button
@@ -83,7 +98,7 @@ const Cesta = () => {
               <div className="mt-8 border-t pt-6">
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-medium">Total</h3>
-                  <p className="text-lg font-bold">${getTotal().toFixed(2)}</p>
+                  <p className="text-lg font-bold">{formatPrice(getTotal())}</p>
                 </div>
                 <div className="space-y-4">
                   <button

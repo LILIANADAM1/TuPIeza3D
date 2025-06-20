@@ -8,8 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:landing": "cp src/pages/landing.html index.html",
-    "predeploy": "npm run build && npm run build:landing",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "homepage": "https://lilianadam1.github.io/TuPIeza3D/",

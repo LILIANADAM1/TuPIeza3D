@@ -48,7 +48,7 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
       id: product.id,
       name: product.name,
       image: product.image || product.thumbnail,
-      price: `${Number(getProductPrice(product)).toFixed(2)} €`, 
+      price: Number(getProductPrice(product)),
       quantity: quantity,
       description: getProductDescription(product)
     };
@@ -94,11 +94,12 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
             {product.name}
           </h3>
           <div className="text-gray-600">
-          {product.price}
-        </div>    {product.description}
+            {Number(getProductPrice(product)).toFixed(2)}€
+          </div>
+          {product.description}
           <div className="flex justify-between items-center">
             <span className="text-gray-500 text-sm">
-              {`${Number(getProductPrice(product)).toFixed(2)} €`}
+              {Number(getProductPrice(product)).toFixed(2)}€
             </span>
             <div className="flex items-center space-x-2">
               <button
