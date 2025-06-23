@@ -98,9 +98,6 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
           </div>
           {product.description}
           <div className="flex justify-between items-center">
-            <span className="text-gray-500 text-sm">
-              {Number(getProductPrice(product)).toFixed(2)}€
-            </span>
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}

@@ -52,12 +52,6 @@ export default function Header() {
                   <HeartIcon className="h-6 w-6" />
                   <span className="ml-2 text-gray-700">Favoritos</span>
                 </Link>
-                <button 
-                  onClick={() => logout({ returnTo: window.location.origin })}
-                  className="text-red-600 hover:text-red-800 px-2 py-1 rounded-md transition-colors"
-                >
-                  Salir
-                </button>
               </>
             ) : (
               <Link to="/login" className="text-gray-700 hover:text-gray-900">
