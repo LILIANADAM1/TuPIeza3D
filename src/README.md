@@ -49,6 +49,12 @@
 - Carrusel de productos populares
 - Grid de productos
 - Tarjetas de producto
+### 4. Formulario (IMPLEMENTADO)
+- Formulario de contacto con validación
+- Integración con FormSubmit.co
+- Manejo de estados (enviando, enviado, errores)
+- Diseño responsive
+- Animaciones de feedback
 
 ## 🛠️ Características Pendientes
 
@@ -58,14 +64,7 @@
 - Pruebas de integración con Playwright
 - Mock Service Worker (MSW.js)
 
-### 2. Formulario (IMPLEMENTADO)
-- Formulario de contacto con validación
-- Integración con FormSubmit.co
-- Manejo de estados (enviando, enviado, errores)
-- Diseño responsive
-- Animaciones de feedback
-
-### 3. Mejoras Técnicas
+### 2. Mejoras Técnicas
 - Implementación de MSW.js para mock API
 - Optimización de performance
 - Implementación de lazy loading
