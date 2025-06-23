@@ -16,6 +16,7 @@ import Cesta from './components/Cesta';
 import About from './components/About';
 import Contacto from './components/Contacto';
 import SearchResults from './pages/SearchResults';
+import Favoritos from './pages/Favoritos';
 import { StoreProvider } from './context/StoreContext';
 import MainPage from './pages/MainPage';
 import './App.css';
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/login" element={<Auth0Login />} />
                 <Route path="/perfil" element={<Profile />} />
                 <Route path="/cesta" element={<Cesta />} />
+                <Route path="/favoritos" element={<Favoritos />} />
               </Routes>
             </main>
             <Footer />

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
-import { getUserCart, updateUserCart } from '../services/api';
+import { getUserCart, updateUserCart, addFavorite, removeFavorite, getUserFavorites } from '../services/api';
 
 const StoreContext = createContext();
 
@@ -119,18 +119,51 @@ export const StoreProvider = ({ children }) => {
     }
   };
 
-  // Favoritos solo permitidos si NO estás logueado
-  const addToFavorites = (product) => {
-    if (user) return; // bloqueamos acción si está logueado
-    if (!favorites.some(item => item.id === product.id)) {
-      setFavorites([...favorites, product]);
+  // Manejar favoritos para usuarios logueados y no logueados
+  const addToFavorites = async (product) => {
+    if (!user) {
+      if (!favorites.some(item => item.id === product.id)) {
+        setFavorites([...favorites, product]);
+      }
+    } else {
+      try {
+        await addFavorite(user.sub, product.id);
+        setFavorites(prev => [...prev, product]);
+      } catch (error) {
+        console.error('Error adding to favorites:', error);
+      }
     }
   };
 
-  const removeFromFavorites = (productId) => {
-    if (user) return; // bloqueamos acción si está logueado
-    setFavorites(favorites.filter(item => item.id !== productId));
+  const removeFromFavorites = async (productId) => {
+    if (!user) {
+      setFavorites(favorites.filter(item => item.id !== productId));
+    } else {
+      try {
+        await removeFavorite(user.sub, productId);
+        setFavorites(prev => prev.filter(item => item.id !== productId));
+      } catch (error) {
+        console.error('Error removing from favorites:', error);
+      }
+    }
   };
+
+  // Cargar favoritos cuando el usuario inicia sesión
+  useEffect(() => {
+    if (user) {
+      const loadUserFavorites = async () => {
+        try {
+          const response = await getUserFavorites(user.sub);
+          if (response) {
+            setFavorites(response);
+          }
+        } catch (error) {
+          console.error('Error loading favorites:', error);
+        }
+      };
+      loadUserFavorites();
+    }
+  }, [user]);
 
   return (
     <StoreContext.Provider
@@ -143,7 +176,8 @@ export const StoreProvider = ({ children }) => {
         clearCart,
         favorites,
         addToFavorites,
-        removeFromFavorites
+        removeFromFavorites,
+        user
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 import { api } from '../services/api';
 import { useStore } from '../context/StoreContext';
-import ProductCard from './ProductCard';
+import CarouselProductCard from './CarouselProductCard';
 
 export default function TopSales() {
   const [products, setProducts] = useState([]);
@@ -78,7 +78,7 @@ export default function TopSales() {
           {products.map((product) => (
             <SplideSlide key={product.id}>
               <div className="w-full h-full">
-                <ProductCard 
+                <CarouselProductCard 
                   product={product}
                   onCart={(productId, quantity) => addToCart(productId, quantity)}
                 />

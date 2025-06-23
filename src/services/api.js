@@ -85,3 +85,34 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
+
+// Favorites API endpoints
+export const addFavorite = async (userId, productId) => {
+  try {
+    const response = await api.post(`/users/${userId}/favorites`, { productId });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding favorite:', error);
+    throw error;
+  }
+};
+
+export const removeFavorite = async (userId, productId) => {
+  try {
+    const response = await api.delete(`/users/${userId}/favorites/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error removing favorite:', error);
+    throw error;
+  }
+};
+
+export const getUserFavorites = async (userId) => {
+  try {
+    const response = await api.get(`/users/${userId}/favorites`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user favorites:', error);
+    throw error;
+  }
+};

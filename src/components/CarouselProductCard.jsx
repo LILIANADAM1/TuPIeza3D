@@ -3,10 +3,9 @@ import { HeartIcon, ShoppingCartIcon, MinusIcon, PlusIcon } from '@heroicons/rea
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
-import UnauthenticatedModal from './UnauthenticatedModal';
 import { getProductPrice, getProductDescription } from '../services/prices';
 
-export default function ProductCard({ product, onLike, onCart, isLiked: initialIsLiked = false }) {
+export default function CarouselProductCard({ product, onCart, isLiked: initialIsLiked = false }) {
   const { user } = useAuth0();
   const [showModal, setShowModal] = useState(false);
   const [quantity, setQuantity] = useState(1);
@@ -65,26 +64,23 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
   };
 
   return (
-    <>
-      {showModal && (
-        <UnauthenticatedModal isOpen={showModal} onClose={() => setShowModal(false)} />
-      )}
-      <div className="bg-white rounded-lg shadow-md overflow-hidden">
-        <div className="relative aspect-[4/3]">
-          <img
-            src={product.image || product.thumbnail}
-            alt={product.name}
-            className="w-full h-full object-cover object-center"
-            loading="lazy"
-            decoding="async"
-            fetchpriority="high"
-            width="400"
-            height="300"
-            quality="90"
-            onError={(e) => {
-              e.currentTarget.src = '/placeholder-image.jpg';
-            }}
-          />
+    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+      <div className="relative aspect-[4/3]">
+        <img
+          src={product.image || product.thumbnail}
+          alt={product.name}
+          className="w-full h-full object-cover object-center"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="high"
+          width="400"
+          height="300"
+          quality="90"
+          onError={(e) => {
+            e.currentTarget.src = '/placeholder-image.jpg';
+          }}
+        />
+        {user && (
           <div className="absolute top-2 right-2">
             <button
               onClick={handleLike}
@@ -97,40 +93,40 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
               )}
             </button>
           </div>
+        )}
+      </div>
+      <div className="p-4">
+        <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-1">
+          {product.name}
+        </h3>
+        <div className="text-gray-600">
+          {Number(getProductPrice(product)).toFixed(2)}€
         </div>
-        <div className="p-4">
-          <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-1">
-            {product.name}
-          </h3>
-          <div className="text-gray-600">
-            {Number(getProductPrice(product)).toFixed(2)}€
-          </div>
-          {product.description}
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="p-2 rounded-full hover:bg-gray-100"
-              >
-                <MinusIcon className="h-6 w-6 text-gray-400" />
-              </button>
-              <span className="px-2 py-1 bg-gray-100 rounded-full">{quantity}</span>
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="p-2 rounded-full hover:bg-gray-100"
-              >
-                <PlusIcon className="h-6 w-6 text-gray-400" />
-              </button>
-              <button
-                onClick={handleCart}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2"
-              >
-                <ShoppingCartIcon className="h-5 w-5" />
-              </button>
-            </div>
+        {product.description}
+        <div className="flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="p-2 rounded-full hover:bg-gray-100"
+            >
+              <MinusIcon className="h-6 w-6 text-gray-400" />
+            </button>
+            <span className="px-2 py-1 bg-gray-100 rounded-full">{quantity}</span>
+            <button
+              onClick={() => setQuantity(quantity + 1)}
+              className="p-2 rounded-full hover:bg-gray-100"
+            >
+              <PlusIcon className="h-6 w-6 text-gray-400" />
+            </button>
+            <button
+              onClick={handleCart}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2"
+            >
+              <ShoppingCartIcon className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
