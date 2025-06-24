@@ -2,12 +2,34 @@ import React from 'react';
 import { useStore } from '../context/StoreContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-import { ShoppingCartIcon, XMarkIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { 
+  ShoppingCartIcon, 
+  XMarkIcon, 
+  MinusIcon, 
+  PlusIcon,
+  UserCircleIcon,
+  TrashIcon
+} from '@heroicons/react/24/outline';
 
 const Cesta = () => {
   const { card, removeFromCart, clearCart, updateItemQuantity } = useStore();
+  const { user, loginWithRedirect, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
-  const { user, loginWithRedirect } = useAuth0();
+
+  const handleClearCart = () => {
+    clearCart();
+    navigate('/cesta');
+  };
+
+  const handleTramitarPedido = () => {
+    if (!isAuthenticated) {
+      loginWithRedirect({
+        returnTo: window.location.origin + '/cesta'
+      });
+      return;
+    }
+    navigate('/pedido');
+  };
 
   const getTotal = () => {
     if (!card || !Array.isArray(card)) return 0;
@@ -100,21 +122,31 @@ const Cesta = () => {
                   <h3 className="text-lg font-medium">Total</h3>
                   <p className="text-lg font-bold">{formatPrice(getTotal())}</p>
                 </div>
-                <div className="space-y-4">
-                  {user ? (
-                    <Link to="/pedido" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-                      Tramitar Pedido
-                    </Link>
-                  ) : (
-                    <Link to="/login" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
-                      Iniciar Sesión para Tramitar
-                    </Link>
-                  )}
+                <div className="mt-6 flex justify-end space-x-4">
                   <button
-                    onClick={clearCart}
-                    className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"
+                    onClick={handleClearCart}
+                    className="px-6 py-3 border border-gray-200 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-gray-50 hover:bg-gray-100 transition-all duration-200 flex items-center space-x-2"
                   >
-                    Limpiar Cesta
+                    <TrashIcon className="h-5 w-5 text-gray-500" />
+                    <span>Limpiar Cesta</span>
+                  </button>
+                  <button
+                    onClick={handleTramitarPedido}
+                    className={`px-6 py-3 border border-transparent rounded-lg shadow-sm text-sm font-medium flex items-center space-x-2 transition-all duration-200 ${
+                      isAuthenticated ? 'bg-emerald-600 hover:bg-emerald-700 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    }`}
+                  >
+                    {isAuthenticated ? (
+                      <>
+                        <ShoppingCartIcon className="h-5 w-5" />
+                        <span>Tramitar Pedido</span>
+                      </>
+                    ) : (
+                      <>
+                        <UserCircleIcon className="h-5 w-5" />
+                        <span>Iniciar Sesión para Tramitar</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>

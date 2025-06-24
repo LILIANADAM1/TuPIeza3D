@@ -29,15 +29,7 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Tramitar Pedido button for authenticated users */}
-          {isAuthenticated && useLocation().pathname === '/cesta' && (
-            <Link
-              to="/pedido"
-              className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-blue-600 hover:text-blue-900 hover:bg-blue-50"
-            >
-              Tramitar Pedido
-            </Link>
-          )}
+
 
           {/* Buscador */}
           <div className="flex-1 px-4">

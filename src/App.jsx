@@ -1,13 +1,9 @@
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Hogar from './pages/Hogar';
 import JuegosJuguetes from './pages/JuegosJuguetes';
 import Gadgets from './pages/Gadgets';
-import CategoryPage from './components/CategoryPage';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import TopSales from './components/TopSales';
-import Products from './components/Products';
 import CategoriesMenu from './components/CategoriesMenu';
 import Auth0Login from './components/Auth0Login';
 import Auth0ProviderWithHistory from './components/Auth0Provider';
