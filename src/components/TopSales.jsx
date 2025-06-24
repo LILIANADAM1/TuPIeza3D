@@ -65,7 +65,7 @@ export default function TopSales() {
             autoplay: true,
             speed: 600,
             interval: 1600,
-            fixedWidth: '262px',
+            fixedWidth: '255px',
             fixedHeight: '500px',
             easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
             perMove: 1,

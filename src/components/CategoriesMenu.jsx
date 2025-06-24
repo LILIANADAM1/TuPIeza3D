@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   ChevronDownIcon,
   ShoppingCartIcon,
@@ -9,8 +9,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
 
 const categories = [
-  { id: 1, name: 'Impresoras 3D', slug: 'impresoras-3d' },
-  { id: 2, name: 'Filamento', slug: 'filamento' },
+  { id: 1, name: 'Hogar', slug: 'hogar' },
+  { id: 2, name: 'Juegos y juguetes', slug: 'juegos-juguetes' },
   { id: 3, name: 'Gadgets', slug: 'gadgets' },
 ];
 
@@ -19,6 +19,8 @@ export default function CategoriesMenu() {
   const { user, isAuthenticated, logout } = useAuth0();
   const { card } = useStore();
   const totalItems = card.reduce((total, item) => total + item.quantity, 0);
+  const navigate = useNavigate();
+  const [isActive, setIsActive] = useState(false);
 
   return (
     <div className="bg-white shadow-sm">
@@ -39,11 +41,15 @@ export default function CategoriesMenu() {
             {/* Cesta */}
             <Link
               to="/cesta"
-              className="relative p-2 rounded-md hover:bg-gray-50 text-gray-700"
+              className={`relative p-2 rounded-md group hover:scale-105 hover:shadow-sm transition-all duration-300 ease-in-out ${isActive ? 'bg-green-500 text-white hover:bg-green-600' : ''}`}
+              onClick={() => {
+                setIsActive(true);
+                setTimeout(() => setIsActive(false), 300);
+              }}
             >
-              <ShoppingCartIcon className="h-6 w-6" />
+              <ShoppingCartIcon className={`h-6 w-6 ${isActive ? 'text-white' : 'text-gray-700'} group-hover:text-blue-500 transition-colors duration-300`} />
               {totalItems > 0 && (
-                <span className="absolute -right-7 bg-red-500 text-white text-sm px-1.5 py-0.5 rounded-full">
+                <span className={`absolute -right-7 ${isActive ? 'bg-green-500' : 'bg-red-500'} text-white text-sm px-1.5 py-0.5 rounded-full transition-transform duration-300 group-hover:scale-110`}>
                   {totalItems}
                 </span>
               )}

@@ -1,10 +1,11 @@
 import { Link, useLocation } from 'react-router-dom';
 import {
-  MagnifyingGlassIcon,
   UserCircleIcon,
   ShoppingCartIcon,
   HeartIcon,
 } from '@heroicons/react/24/outline';
+import SearchBar from './SearchBar';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
 import { useState } from 'react';
@@ -12,17 +13,9 @@ import logo from '../assets/logopieza.png';
 import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
-  const [searchQuery, setSearchQuery] = useState('');
   const { user, isAuthenticated, logout } = useAuth0();
   const { card } = useStore();
-  const navigate = useNavigate();
   const totalItems = card.reduce((total, item) => total + item.quantity, 0);
-
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // Aquí puedes manejar la búsqueda
-    console.log('Searching for:', searchQuery);
-  };
 
   return (
     <header className="bg-white shadow-sm">
@@ -49,18 +42,7 @@ export default function Header() {
 
           {/* Buscador escritorio */}
           <div className="hidden sm:flex flex-1 justify-center">
-            <form onSubmit={handleSearch} className="flex w-full max-w-md">
-              <div className="relative flex-1">
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="¿Qué estás buscando?"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </form>
+            <SearchBar className="w-full max-w-md" />
           </div>
 
           {/* Desktop view */}

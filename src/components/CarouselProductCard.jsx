@@ -105,27 +105,27 @@ export default function CarouselProductCard({ product, onCart, isLiked: initialI
           </h3>
           {product.description}
           <div className="flex justify-center items-center space-x-2">
-            <span className="text-gray-600">
+            <span className="text-sm text-gray-600">
               {Number(getProductPrice(product)).toFixed(2)}€
             </span>
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="p-2 rounded-full hover:bg-gray-100"
+              className="p-1.5 rounded-full hover:bg-gray-100"
             >
-              <MinusIcon className="h-6 w-6 text-gray-400" />
+              <MinusIcon className="h-4 w-4 text-gray-400" />
             </button>
-            <span className="px-2 py-1 bg-gray-100 rounded-full">{quantity}</span>
+            <span className="px-1.5 py-0.5 bg-gray-100 rounded-full text-sm">{quantity}</span>
             <button
               onClick={() => setQuantity(quantity + 1)}
-              className="p-2 rounded-full hover:bg-gray-100"
+              className="p-1.5 rounded-full hover:bg-gray-100"
             >
-              <PlusIcon className="h-6 w-6 text-gray-400" />
+              <PlusIcon className="h-4 w-4 text-gray-400" />
             </button>
             <button
               onClick={handleCart}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2"
+              className="bg-blue-500 text-white px-3 py-1.5 rounded-md hover:bg-blue-600 flex items-center space-x-1"
             >
-              <ShoppingCartIcon className="h-5 w-5" />
+              <ShoppingCartIcon className="h-4 w-4" />
             </button>
           </div>
         </div>
