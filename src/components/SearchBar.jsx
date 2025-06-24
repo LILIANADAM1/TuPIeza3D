@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react';
 import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Limpiar el buscador cuando cambia la ruta
+  useEffect(() => {
+    if (location.pathname !== '/search') {
+      setSearchQuery('');
+    }
+  }, [location.pathname]);
 
   // Hacer la búsqueda después de un pequeño delay para evitar peticiones innecesarias
   useEffect(() => {
