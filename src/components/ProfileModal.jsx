@@ -51,10 +51,6 @@ const ProfileModal = ({ isOpen, onClose }) => {
               <span>Mis Favoritos</span>
               <HeartIcon className="h-5 w-5 text-red-500" />
             </button>
-            <button className="flex items-center justify-between w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 rounded-lg">
-              <span>Ajustes</span>
-              <Cog6ToothIcon className="h-5 w-5 text-gray-500" />
-            </button>
           </div>
 
           {/* Lista de favoritos */}

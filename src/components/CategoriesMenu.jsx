@@ -56,15 +56,15 @@ export default function CategoriesMenu() {
               <span className="sr-only">Cesta</span>
             </Link>
 
-            {/* Iniciar Sesión */}
+            {/* Perfil/Cerrar Sesión */}
             {isAuthenticated ? (
-              <button
-                onClick={() => logout({ returnTo: window.location.origin })}
+              <Link
+                to="/perfil"
                 className="p-2 rounded-md hover:bg-gray-50 text-gray-700"
               >
                 <UserCircleIcon className="h-6 w-6" />
-                <span className="sr-only">Cerrar Sesión</span>
-              </button>
+                <span className="sr-only">Ver Perfil</span>
+              </Link>
             ) : (
               <Link
                 to="/login"

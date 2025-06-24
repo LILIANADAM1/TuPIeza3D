@@ -85,7 +85,7 @@ export default function CarouselProductCard({ product, onCart, isLiked: initialI
             }}
           />
           {user && (
-            <div className="absolute top-2 right-2">
+            <div className="absolute top-2 right-8">
               <button
                 onClick={handleLike}
                 className="p-2 rounded-full bg-white hover:bg-red-200 hover:text-white"

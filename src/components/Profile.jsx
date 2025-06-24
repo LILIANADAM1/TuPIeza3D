@@ -26,15 +26,7 @@ const Profile = () => {
           <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
             <div className="max-w-md mx-auto">
               <div className="divide-y divide-gray-200">
-                {/* Botón para abrir modal en móvil */}
-                <div className="sm:hidden">
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="w-full px-4 py-2 text-white bg-purple-600 rounded-lg hover:bg-purple-700"
-                  >
-                    Ver Perfil
-                  </button>
-                </div>
+
                 {/* Sección de Información Personal */}
                 <div className="py-8">
                   <div className="flex items-center justify-between">
@@ -73,10 +65,7 @@ const Profile = () => {
                       <span>Mis Favoritos</span>
                       <HeartIcon className="h-5 w-5 text-red-500" />
                     </button>
-                    <button className="flex items-center justify-between w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-50 rounded-lg">
-                      <span>Ajustes</span>
-                      <Cog6ToothIcon className="h-5 w-5 text-gray-500" />
-                    </button>
+                   
                   </div>
                 </div>
 

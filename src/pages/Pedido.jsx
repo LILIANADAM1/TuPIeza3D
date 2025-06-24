@@ -74,19 +74,19 @@ const Pedido = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-6 flex flex-col justify-center sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-lg mx-auto">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
+    <div className="min-h-screen bg-gray-50 py-4 sm:py-6 lg:py-8 flex flex-col justify-center">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-md sm:max-w-lg mx-auto">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-lg">
             {/* Volver a la Cesta button */}
             <button
               onClick={() => navigate('/cesta')}
-              className="mb-6 p-2 bg-gray-100 rounded-md hover:bg-gray-200 flex items-center space-x-2"
+              className="mb-4 sm:mb-6 p-2 bg-gray-100 rounded-md hover:bg-gray-200 flex items-center justify-center sm:justify-start space-x-2 w-full sm:w-auto"
             >
               <ArrowLeftIcon className="h-5 w-5 text-gray-600" />
               <span className="text-gray-600">Volver a la Cesta</span>
             </button>
-            <h1 className="text-2xl font-bold text-gray-900 mb-6">
+            <h1 className="text-2xl font-bold text-gray-900 mb-4 sm:mb-6 text-center sm:text-left">
               <ShoppingCartIcon className="h-6 w-6 inline-block mr-2" />
               Tramitar Pedido
             </h1>
@@ -96,17 +96,19 @@ const Pedido = () => {
                 <h2 className="text-lg font-medium text-gray-900 mb-4">Detalles del Pedido</h2>
                 <div className="space-y-4">
                   {card.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded">
+                    <div key={index} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 bg-gray-50 rounded">
                       <div>
-                        <h3 className="font-medium text-gray-900">{item.name}</h3>
-                        <p className="text-gray-600">Cantidad: {item.quantity}</p>
+                        <div className="space-y-2 sm:space-y-0">
+                          <h3 className="font-medium text-gray-900">{item.name}</h3>
+                          <p className="text-gray-600 text-sm">Cantidad: {item.quantity}</p>
+                        </div>
                       </div>
-                      <p className="font-medium text-gray-900">{Number(item.price * item.quantity).toFixed(2)}€</p>
+                      <p className="font-medium text-gray-900 text-sm">{Number(item.price * item.quantity).toFixed(2)}€</p>
                     </div>
                   ))}
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <div className="flex justify-between font-medium">
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-200">
+                  <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 font-medium">
                     <span>Total</span>
                     <span>{total.toFixed(2)}€</span>
                   </div>
@@ -114,17 +116,17 @@ const Pedido = () => {
               </div>
 
               <div>
-                <h2 className="text-lg font-medium text-gray-900 mb-4">Métodos de Pago</h2>
-                <div className="space-y-4">
+                <h2 className="text-lg font-medium text-gray-900 mb-3 sm:mb-4">Métodos de Pago</h2>
+                <div className="space-y-3 sm:space-y-4">
                   {paymentOptions.map((option) => (
                     <div
                       key={option.id}
-                      className="border rounded-lg p-4 hover:bg-gray-50 transition-colors cursor-pointer"
+                      className="border rounded-lg p-3 sm:p-4 hover:bg-gray-50 transition-colors cursor-pointer"
                       onClick={() => setSelectedPayment(option.id)}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 space-x-0 sm:space-x-3">
                             <option.icon className="h-6 w-6 text-gray-400" />
                             <span className="text-gray-900 font-medium">{option.name}</span>
                           </div>
@@ -135,7 +137,7 @@ const Pedido = () => {
                           )}
                         </div>
                         {option.description && (
-                          <p className="mt-2 text-sm text-gray-500">
+                          <p className="mt-1 sm:mt-2 text-sm text-gray-500">
                             {option.description}
                           </p>
                         )}
@@ -145,12 +147,12 @@ const Pedido = () => {
                 </div>
               </div>
 
-              <div className="mt-6">
+              <div className="mt-4 sm:mt-6">
                 <button
                   onClick={handlePayment}
-                  className="w-full py-3 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="w-full py-2 sm:py-3 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
-                  Realizar Pago
+                  <span className="text-sm sm:text-base">Realizar Pago</span>
                 </button>
               </div>
             </div>
