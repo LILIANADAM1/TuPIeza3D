@@ -8,8 +8,8 @@ function MainPage() {
   const navigate = useNavigate();
 
   // Redirigir a la página principal si estamos en la raíz
-  if (location.pathname === '/TuPIeza3D/') {
-    navigate('/TuPIeza3D/');
+  if (location.pathname === '/TuPieza3D/') {
+    navigate('/TuPieza3D/');
   }
 
   return (

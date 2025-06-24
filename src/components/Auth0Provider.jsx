@@ -8,7 +8,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
   // Determinar la URL de callback según el entorno
   const isProduction = process.env.NODE_ENV === 'production';
   const redirectUri = isProduction 
-    ? 'https://lilianadam1.github.io/TuPIeza3D/'
+    ? 'https://lilianadam1.github.io/TuPieza3D/'
     : window.location.origin;
 
   return (

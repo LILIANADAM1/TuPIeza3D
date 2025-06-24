@@ -1,4 +1,4 @@
-# TuPIeza3D - E-commerce de Productos 3D
+# TuPieza3D - E-commerce de Productos 3D
 
 ## 🚀 Tecnologías Utilizadas
 
@@ -112,11 +112,11 @@ npm run build
 
 La aplicación está desplegada en GitHub Pages:
 
-- **URL de producción**: https://lilianadam1.github.io/TuPIeza3D/
+- **URL de producción**: https://lilianadam1.github.io/TuPieza3D/
 - **Plataforma**: GitHub Pages
 - **Rama**: main
 - **Proceso de despliegue**: Automático mediante GitHub Actions
-- **Base URL**: /TuPIeza3D/
+- **Base URL**: /TuPieza3D/
 
 ## 🔐 Seguridad
 

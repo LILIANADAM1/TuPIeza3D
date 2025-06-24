@@ -1,5 +1,5 @@
 {
-  "name": "tupieza3d",
+  "name": "tuPieza3d",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,7 +11,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://lilianadam1.github.io/TuPIeza3D/",
+  "homepage": "https://lilianadam1.github.io/TuPieza3D/",
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
     "@headlessui/react": "^2.2.4",

@@ -17,7 +17,7 @@ const About = () => {
             Desde su taller en Bilbao, Xabier comenzó a experimentar con diferentes tecnologías de impresión 3D, buscando formas de hacerlas más accesibles y fáciles de usar para personas sin experiencia técnica.
           </p>
           <p>
-            Con años de experiencia en el sector industrial y un profundo conocimiento de los materiales, Xabier desarrolló una plataforma única que combina diseño, impresión y distribución de piezas 3D de alta calidad.
+            Con años de experiencia en el sector industrial y un profundo conocimiento de los materiales, Xabier desarrolló una plataforma única que combina diseño, impresión y distribución de Piezas 3D de alta calidad.
           </p>
           <p>
             Hoy en día, TuPieza3D es mucho más que una tienda de impresión 3D. Es una comunidad de innovadores, diseñadores y entusiastas que comparten una visión común: crear un futuro más sostenible y personalizado a través de la tecnología.
@@ -31,7 +31,7 @@ const About = () => {
           <div className="relative p-8 bg-white rounded-lg shadow-lg">
             <img 
               src="/logo-xabier.jpg" 
-              alt="Xabier Uribe - Fundador de TuPIeza3D" 
+              alt="Xabier Uribe - Fundador de TuPieza3D" 
               className="w-full h-auto rounded-lg shadow-lg"
               loading="lazy"
               decoding="async"
