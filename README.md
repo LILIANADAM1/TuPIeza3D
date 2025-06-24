@@ -7,7 +7,7 @@
 - **Estado**: Zustand
 - **HTTP Client**: Axios
 - **Estilos**: Tailwind CSS
-- **Testing**: Testing Library + Playwright
+- **Testing**: Vitest + Testing Library
 - **Form Submission**: FormSubmit.co
 - **Autenticación**: Auth0 OAuth
 
@@ -20,7 +20,7 @@
    - Sistema de construcción profesional: Vite
    - Gestión del estado con Zustand
    - Estilos aislados con Tailwind
-   - Testing con Testing Library y Playwright
+   - Testing unitario con Vitest y Testing Library
 
 2. **API y Servicios**
    - Integración con API externa (Thingiverse)
@@ -56,22 +56,42 @@
 - Diseño responsive
 - Animaciones de feedback
 
+## 🛠️ Testing
+
+### Tests Unitarios
+- **Framework**: Vitest + Testing Library
+- **Componentes testeados**: SearchBar, ProductCard, Contacto
+- **Cobertura**: Funciones críticas del frontend
+
+### Interfaz de Testing
+- **Vitest UI**: [http://localhost:51204/__vitest__/](http://localhost:51204/__vitest__/)
+- Ejecutar tests: `npm test`
+- Interfaz visual: `npm run test:ui`
+
+### Comandos de Testing
+```bash
+# Ejecutar todos los tests
+npm test
+
+# Ejecutar tests en modo watch
+npm test -- --watch
+
+# Abrir interfaz visual de tests
+npm run test:ui
+```
+
 ## 🛠️ Características Pendientes
 
-### 1. Testing
-- Pruebas unitarias con Jest
-- Pruebas de componentes con Testing Library
+### 1. Testing Avanzado
 - Pruebas de integración con Playwright
 - Mock Service Worker (MSW.js)
+- Aumento de cobertura de tests
 
 ### 2. Mejoras Técnicas
 - Implementación de MSW.js para mock API
 - Optimización de performance
 - Implementación de lazy loading
 - Mejora de accesibilidad
-- Implementación de testing unitario y de componentes
-- Pruebas de integración con Playwright
-- Mock Service Worker (MSW.js) para pruebas
 
 ## 📦 Estructura del Proyecto
 
@@ -93,6 +113,9 @@ src/
 │   └── api.js        # Llamadas a la API
 ├── utils/            # Utilidades
 └── tests/           # Pruebas
+    ├── components/   # Tests de componentes
+    ├── services/     # Tests de servicios
+    └── setup.js      # Configuración de tests
 ```
 
 ## 🚀 Instalación y Ejecución
@@ -106,6 +129,12 @@ npm run dev
 
 # Construir para producción
 npm run build
+
+# Ejecutar tests
+npm test
+
+# Abrir interfaz de tests
+npm run test:ui
 ```
 
 ## 🌐 Despliegue
