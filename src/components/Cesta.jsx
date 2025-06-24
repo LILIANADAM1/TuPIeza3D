@@ -1,6 +1,6 @@
 import React from 'react';
 import { useStore } from '../context/StoreContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 import { ShoppingCartIcon, XMarkIcon, MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
 
@@ -101,26 +101,15 @@ const Cesta = () => {
                   <p className="text-lg font-bold">{formatPrice(getTotal())}</p>
                 </div>
                 <div className="space-y-4">
-                  <button
-                    onClick={async () => {
-                      if (!user) {
-                        try {
-                          // Guardar la cesta actual en localStorage antes de redirigir
-                          localStorage.setItem('guestCart', JSON.stringify(card));
-                          await loginWithRedirect({
-                            returnTo: window.location.origin + '/cesta'
-                          });
-                        } catch (error) {
-                          console.error('Error al iniciar sesión:', error);
-                        }
-                      } else {
-                        navigate('/pedido');
-                      }
-                    }}
-                    className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
-                  >
-                    {user ? 'Tramitar Pedido' : 'Iniciar Sesión para Tramitar'}
-                  </button>
+                  {user ? (
+                    <Link to="/pedido" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                      Tramitar Pedido
+                    </Link>
+                  ) : (
+                    <Link to="/login" className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                      Iniciar Sesión para Tramitar
+                    </Link>
+                  )}
                   <button
                     onClick={clearCart}
                     className="w-full bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700"

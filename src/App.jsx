@@ -17,6 +17,7 @@ import About from './components/About';
 import Contacto from './components/Contacto';
 import SearchResults from './pages/SearchResults';
 import Favoritos from './pages/Favoritos';
+import Pedido from './pages/Pedido';
 import { StoreProvider } from './context/StoreContext';
 import MainPage from './pages/MainPage';
 import './App.css';
@@ -44,6 +45,7 @@ function App() {
                 <Route path="/login" element={<Auth0Login />} />
                 <Route path="/perfil" element={<Profile />} />
                 <Route path="/cesta" element={<Cesta />} />
+                <Route path="/pedido" element={<Pedido />} />
                 <Route path="/favoritos" element={<Favoritos />} />
               </Routes>
             </main>

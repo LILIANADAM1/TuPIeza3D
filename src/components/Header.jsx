@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   MagnifyingGlassIcon,
   UserCircleIcon,
@@ -9,6 +9,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
 import SearchBar from './SearchBar';
 import logo from '../assets/logopieza.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth0();
@@ -27,6 +28,16 @@ export default function Header() {
               <span className="ml-4 text-3xl font-bold text-gray-800">Tu Pieza 3D</span>
             </Link>
           </div>
+
+          {/* Tramitar Pedido button for authenticated users */}
+          {isAuthenticated && useLocation().pathname === '/cesta' && (
+            <Link
+              to="/pedido"
+              className="ml-4 px-3 py-2 rounded-md text-sm font-medium text-blue-600 hover:text-blue-900 hover:bg-blue-50"
+            >
+              Tramitar Pedido
+            </Link>
+          )}
 
           {/* Buscador */}
           <div className="flex-1 px-4">
