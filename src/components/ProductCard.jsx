@@ -98,36 +98,34 @@ export default function ProductCard({ product, onLike, onCart, isLiked: initialI
             </button>
           </div>
         </div>
-        <div className="p-4">
+        <div className="p-4 text-center">
           <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-1">
             {product.name}
           </h3>
-          <div className="text-gray-600">
-            {Number(getProductPrice(product)).toFixed(2)}€
-          </div>
           {product.description}
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                className="p-2 rounded-full hover:bg-gray-100"
-              >
-                <MinusIcon className="h-6 w-6 text-gray-400" />
-              </button>
-              <span className="px-2 py-1 bg-gray-100 rounded-full">{quantity}</span>
-              <button
-                onClick={() => setQuantity(quantity + 1)}
-                className="p-2 rounded-full hover:bg-gray-100"
-              >
-                <PlusIcon className="h-6 w-6 text-gray-400" />
-              </button>
-              <button
-                onClick={handleCart}
-                className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2"
-              >
-                <ShoppingCartIcon className="h-5 w-5" />
-              </button>
-            </div>
+          <div className="flex justify-center items-center space-x-2">
+            <span className="text-gray-600">
+              {Number(getProductPrice(product)).toFixed(2)}€
+            </span>
+            <button
+              onClick={() => setQuantity(Math.max(1, quantity - 1))}
+              className="p-2 rounded-full hover:bg-gray-100"
+            >
+              <MinusIcon className="h-6 w-6 text-gray-400" />
+            </button>
+            <span className="px-2 py-1 bg-gray-100 rounded-full">{quantity}</span>
+            <button
+              onClick={() => setQuantity(quantity + 1)}
+              className="p-2 rounded-full hover:bg-gray-100"
+            >
+              <PlusIcon className="h-6 w-6 text-gray-400" />
+            </button>
+            <button
+              onClick={handleCart}
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center space-x-2"
+            >
+              <ShoppingCartIcon className="h-5 w-5" />
+            </button>
           </div>
         </div>
       </div>

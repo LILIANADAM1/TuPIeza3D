@@ -64,47 +64,50 @@ export default function CarouselProductCard({ product, onCart, isLiked: initialI
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="relative aspect-[4/3]">
-        <img
-          src={product.image || product.thumbnail}
-          alt={product.name}
-          className="w-full h-full object-cover object-center"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="high"
-          width="400"
-          height="300"
-          quality="90"
-          onError={(e) => {
-            e.currentTarget.src = '/placeholder-image.jpg';
-          }}
-        />
-        {user && (
-          <div className="absolute top-2 right-2">
-            <button
-              onClick={handleLike}
-              className="p-2 rounded-full bg-white hover:bg-red-200 hover:text-white"
-            >
-              {isLiked ? (
-                <HeartIconSolid className={`h-6 w-6 ${heartColor}`} />
-              ) : (
-                <HeartIcon className={`h-6 w-6 ${heartColor}`} />
-              )}
-            </button>
-          </div>
-        )}
-      </div>
-      <div className="p-4">
-        <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-1">
-          {product.name}
-        </h3>
-        <div className="text-gray-600">
-          {Number(getProductPrice(product)).toFixed(2)}€
+    <>
+      {showModal && (
+        <UnauthenticatedModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      )}
+      <div className="bg-white rounded-lg shadow-md overflow-hidden">
+        <div className="relative aspect-[4/3]">
+          <img
+            src={product.image || product.thumbnail}
+            alt={product.name}
+            className="w-full h-full object-cover object-center"
+            loading="lazy"
+            decoding="async"
+            fetchpriority="high"
+            width="400"
+            height="300"
+            quality="90"
+            onError={(e) => {
+              e.currentTarget.src = '/placeholder-image.jpg';
+            }}
+          />
+          {user && (
+            <div className="absolute top-2 right-2">
+              <button
+                onClick={handleLike}
+                className="p-2 rounded-full bg-white hover:bg-red-200 hover:text-white"
+              >
+                {isLiked ? (
+                  <HeartIconSolid className={`h-6 w-6 ${heartColor}`} />
+                ) : (
+                  <HeartIcon className={`h-6 w-6 ${heartColor}`} />
+                )}
+              </button>
+            </div>
+          )}
         </div>
-        {product.description}
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-2">
+        <div className="p-4 text-center">
+          <h3 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-1">
+            {product.name}
+          </h3>
+          {product.description}
+          <div className="flex justify-center items-center space-x-2">
+            <span className="text-gray-600">
+              {Number(getProductPrice(product)).toFixed(2)}€
+            </span>
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
               className="p-2 rounded-full hover:bg-gray-100"
@@ -127,6 +130,6 @@ export default function CarouselProductCard({ product, onCart, isLiked: initialI
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
