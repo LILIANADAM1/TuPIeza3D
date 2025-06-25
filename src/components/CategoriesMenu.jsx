@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
   ChevronDownIcon,
   ShoppingCartIcon,
-  UserCircleIcon
+  UserCircleIcon,
+  Bars3Icon
 } from '@heroicons/react/24/outline';
 import { useAuth0 } from '@auth0/auth0-react';
 import { useStore } from '../context/StoreContext';
@@ -31,6 +32,7 @@ export default function CategoriesMenu() {
               onClick={() => setIsOpen(!isOpen)}
               className="flex items-center text-gray-700 hover:text-gray-900"
             >
+              <Bars3Icon className="h-5 w-5 text-gray-500 mr-2" />
               Categorías
               <ChevronDownIcon className="ml-1 h-5 w-5 text-gray-500 sm:hidden" />
             </button>
