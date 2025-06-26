@@ -141,7 +141,7 @@ npm run test:ui
 
 La aplicación está desplegada en GitHub Pages:
 
-- **URL de producción**: https://lilianadam1.github.io/TuPieza3D/
+- **URL de producción**: https://MORENOLILIANA.github.io/TuPieza3D/
 - **Plataforma**: GitHub Pages
 - **Rama**: main
 - **Proceso de despliegue**: Automático mediante GitHub Actions
